@@ -1,12 +1,12 @@
 # AfyaPlus Service Platform
 
-A secured, containerised AI service platform for Kenyan clinic supply logistics — built as a Moringa School AI Engineering capstone project.
+A secured, containerised AI service platform for Kenyan clinic supply logistics — built as a self-directed AI Engineering project.
 
 Wraps an AI triage model behind a production-grade FastAPI service, and gives an LLM agent hands: real tools to look up stock, plan delivery routes, and estimate delivery times across five partner clinics — all behind JWT authentication, all traceable, all containerised.
 
 ## What this is
 
-AfyaPlus supplies medicine and test kits to five partner clinics across four Kenyan counties. This platform replaces a manual, phone-and-spreadsheet workflow with:
+AfyaPlus is a scenario modelling a real operational problem: supplying medicine and test kits to five partner clinics across four Kenyan counties. This platform replaces a manual, phone-and-spreadsheet workflow with:
 
 - A **secured triage API** — a model behind a URL, not a script on someone's laptop
 - A **containerised deployment** — the exact same environment on any machine
@@ -91,4 +91,4 @@ Full engineering report, architecture rationale, and stakeholder recommendation:
 
 ## Author
 
-Esther Kamau ([@Eswa2020](https://github.com/Eswa2020)) — Moringa School AI Engineering, Week 6 capstone.
+Esther Kamau ([@Eswa2020](https://github.com/Eswa2020)) — self-directed AI Engineering project.
