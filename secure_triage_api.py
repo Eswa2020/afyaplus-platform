@@ -6,7 +6,7 @@ from rate_limit import check_rate_limit
 import concurrent.futures
 from datetime import datetime
 
-app = FastAPI(title="AfyaPlus Triage API (Secured)", version="1.1.0")
+app = FastAPI(title="AfyaPlus Triage Service", version="1.1.0")
 
 executor = concurrent.futures.ThreadPoolExecutor()
 
