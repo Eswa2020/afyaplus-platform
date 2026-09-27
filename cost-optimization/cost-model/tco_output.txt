@@ -1,0 +1,15 @@
+unit: api=0.0001755 infra=0.0000263 USD per request
+people/ops: 200.00 USD per month (8 h x 25 USD)
+
+scenario                  requests   hit  api+infra      TCO  $/1k run  $/1k TCO  budget
+baseline month           2,000,000    0%     403.65   603.65    0.2018    0.3018  ok
+baseline month           2,000,000   30%     298.35   498.35    0.1492    0.2492  ok
+baseline month           2,000,000   60%     193.05   393.05    0.0965    0.1965  ok
+payday-spike month       3,200,000    0%     645.84   845.84    0.2018    0.2643  OVER
+payday-spike month       3,200,000   30%     477.36   677.36    0.1492    0.2117  OVER
+payday-spike month       3,200,000   60%     308.88   508.88    0.0965    0.1590  ok
+sustained 10x month     20,000,000    0%    4036.50  4236.50    0.2018    0.2118  OVER
+sustained 10x month     20,000,000   30%    2983.50  3183.50    0.1492    0.1592  OVER
+sustained 10x month     20,000,000   60%    1930.50  2130.50    0.0965    0.1065  OVER
+
+payday-spike month needs a cache hit rate of at least 34.9% to stay under the 450 USD cap

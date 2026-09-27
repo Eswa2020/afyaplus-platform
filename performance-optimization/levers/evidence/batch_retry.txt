@@ -1,0 +1,16 @@
+fresh queue: {'pending': 4}
+pass 1
+batch of 4 failed (cannot summarise: <poison> malformed row); retrying jobs one at a time
+done=3 failed=1 {'done': 3, 'pending': 1}
+  job 3: pending, attempts=1, text='<poison> malformed row'
+pass 2
+batch of 1 failed (cannot summarise: <poison> malformed row); retrying jobs one at a time
+done=0 failed=1 {'done': 3, 'pending': 1}
+  job 3: pending, attempts=2, text='<poison> malformed row'
+pass 3
+batch of 1 failed (cannot summarise: <poison> malformed row); retrying jobs one at a time
+done=0 failed=1 {'dead': 1, 'done': 3}
+  job 3: dead, attempts=3, text='<poison> malformed row'
+pass 4
+done=0 failed=0 {'dead': 1, 'done': 3}
+  job 3: dead, attempts=3, text='<poison> malformed row'

@@ -1,0 +1,5 @@
+Inside app (Week 6): slowapi e.g. 30/minute per token
+Azure OpenAI quota: e.g. 30k tokens/minute on the deployment
+AWS Bedrock: model-specific RPM/TPM
+Nebius AI Studio: project-level rate / GPU concurrency
+Ops rule: monitor 429s from the provider distinctly from 429s from your own API

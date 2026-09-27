@@ -1,0 +1,7 @@
+# Principle of least privilege for triage-api
+role: triage-api-runtime
+allow:
+  - "secretsmanager:GetSecretValue on secret/afyaplus/llm"
+  - "logs:PutLogEvents"
+deny:
+  - "* on billing / budget mutation"   # app role must not raise its own ceiling

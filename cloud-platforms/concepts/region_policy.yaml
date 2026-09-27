@@ -1,0 +1,10 @@
+# Documented choice, review with legal/compliance, not only SRE
+service: triage-api
+image: triage-api:1.0.0
+preferred_regions:
+  azure: [westeurope, southafricanorth]   # avoid default eastus for PHI-ish traffic
+  aws: [eu-west-1, af-south-1]
+  nebius: [eu-north-1]                    # confirm current Nebius region catalogue
+data_residency_note: >
+  Prompt/completion logs stay in the chosen region;
+  no cross-region replica of patient text without a DPIA.

@@ -1,0 +1,17 @@
+# Conceptual split, read and adapt, not deployed
+interactive:
+  service: triage-api
+  runtime: container
+  image: triage-api:1.1.0
+  memory: 512
+  min_instances: 1          # avoid cold start on clinician path
+  max_instances: 4          # hard ceiling vs Monday's 10x traffic story
+  env:
+    LLM_BASE_URL: ${LLM_BASE_URL}
+    LLM_MODEL: ${LLM_MODEL}
+batch:
+  service: nightly_usage_rollup
+  runtime: function
+  min_instances: 0          # scale to zero, cold start acceptable overnight
+  max_instances: 2
+  trigger: cron(0 2 * * *)

@@ -1,0 +1,2 @@
+backend=redis hits=60 misses=40 hit_rate=0.60
+exit code: 0

@@ -1,0 +1,14 @@
+{
+  "displayName": "afyaplus-triage-monthly",
+  "amount": 400,
+  "timeGrain": "Monthly",
+  "category": "Cost",
+  "notifications": {
+    "Actual_GreaterThan_80_Percent": {
+      "enabled": true,
+      "operator": "GreaterThan",
+      "threshold": 80,
+      "contactEmails": ["finops@afyaplus.ke"]
+    }
+  }
+}

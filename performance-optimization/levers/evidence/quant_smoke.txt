@@ -1,0 +1,31 @@
+{
+  "n": 20,
+  "model": "gpt-4o-mini",
+  "agreement_rate": 0.8,
+  "tokens_full": 1247,
+  "tokens_small": 637,
+  "usd_per_1k_full": 0.0158,
+  "usd_per_1k_small": 0.0055,
+  "disagreements": [
+    {
+      "message": "Fever for two days, drinking fluids",
+      "full": "routine",
+      "small": "urgent"
+    },
+    {
+      "message": "Stomach pain after eating",
+      "full": "routine",
+      "small": "urgent"
+    },
+    {
+      "message": "Toothache for three days",
+      "full": "routine",
+      "small": "urgent"
+    },
+    {
+      "message": "Low-grade fever with body aches",
+      "full": "urgent",
+      "small": "routine"
+    }
+  ]
+}

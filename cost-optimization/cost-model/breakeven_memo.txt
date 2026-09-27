@@ -1,0 +1,17 @@
+AfyaPlus triage, API vs self-hosted break-even
+api_usd_per_req=0.000202
+selfhost_fixed_monthly=1300.00
+selfhost_var_per_req=0.000050
+break_even_monthly_requests=8562490
+
+Recommendation sketch:
+- Below break-even: stay API-hosted; invest in cache, prompt trim, rate limits.
+- Near break-even: pilot self-host on hot FAQ paths only; keep /triage contract.
+- Above break-even: migrate hot volume; keep API for bursts and experiments.
+- GPU ops risk: patching, capacity, cold start, budget PEOPLE_ONCALL_MONTHLY.
+
+Sensitivity: people cost
+break_even_with_oncall=8562490
+break_even_without_oncall=5927877
+Setting on-call to zero cuts the break-even volume by 30.8%, so self-hosting appears to pay off at a volume AfyaPlus would reach much sooner.
+The honest figure is the one to present to Finance: the on-call hours are worked either way, and a recommendation that only holds when engineering time is priced at zero is not a recommendation.

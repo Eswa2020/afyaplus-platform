@@ -1,0 +1,5 @@
+unit_usd=0.000202
+baseline_monthly=403.65
+storm_monthly=484.38
+sane_monthly=407.69
+storm_amplification=1.200

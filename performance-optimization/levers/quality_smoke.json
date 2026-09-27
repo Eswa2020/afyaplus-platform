@@ -1,0 +1,32 @@
+{
+  "n": 20,
+  "model": "gpt-4o-mini",
+  "agreement_rate": 0.8,
+  "tokens_full": 1247,
+  "tokens_small": 637,
+  "usd_per_1k_full": 0.0158,
+  "usd_per_1k_small": 0.0055,
+  "disagreements": [
+    {
+      "message": "Fever for two days, drinking fluids",
+      "full": "routine",
+      "small": "urgent"
+    },
+    {
+      "message": "Stomach pain after eating",
+      "full": "routine",
+      "small": "urgent"
+    },
+    {
+      "message": "Toothache for three days",
+      "full": "routine",
+      "small": "urgent"
+    },
+    {
+      "message": "Low-grade fever with body aches",
+      "full": "urgent",
+      "small": "routine"
+    }
+  ],
+  "notes": "Proxy for quantization: same model, shorter prompt and a 4-token label-only answer vs label plus reason. Reference is the full path, not a clinical label; agreement measures consistency, not correctness. Prices from cost_model.py, API cost only (no infra overhead). Replace with a real INT8 endpoint when available."
+}

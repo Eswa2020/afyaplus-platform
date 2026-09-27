@@ -1,4 +1,3 @@
-# minor comment edit for cache test
 # secure_triage_api.py
 from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
 from pydantic import BaseModel, Field
@@ -6,8 +5,13 @@ from auth import check_password, create_token, current_user
 from rate_limit import check_rate_limit
 import concurrent.futures
 from datetime import datetime
+import os
 
-app = FastAPI(title="AfyaPlus Secured Triage API", version="1.1.0")
+SERVICE_VERSION = "1.1.0"  # must match the Docker image tag
+LLM_BASE_URL = os.getenv("LLM_BASE_URL", "https://api.openai.com/v1")
+LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
+
+app = FastAPI(title="AfyaPlus Secured Triage API", version=SERVICE_VERSION)
 
 executor = concurrent.futures.ThreadPoolExecutor()
 
@@ -36,7 +40,13 @@ class TriageRequest(BaseModel):
 
 @app.get("/health")
 def health():
-    return {"service": "triage-api", "version": "1.1.0", "status": "ok"}
+    return {
+        "service": "triage-api",
+        "version": SERVICE_VERSION,
+        "status": "ok",
+        "llm_base_url": LLM_BASE_URL,  # which provider this deploy is wired to
+        "llm_model": LLM_MODEL,        # never expose LLM_API_KEY here
+    }
 
 @app.post("/token")
 def login(body: LoginRequest):

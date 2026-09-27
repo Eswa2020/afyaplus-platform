@@ -1,0 +1,7 @@
+API-hosted triage path:
+ mobile → FastAPI /triage → OpenAI gpt-4o-mini
+
+Self-hosted triage path:
+ mobile → FastAPI /triage → vLLM (GPU) → Llama / Mistral weights
+
+Same contract either way, swap the model client, keep Pydantic + JWT.

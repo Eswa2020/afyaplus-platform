@@ -1,0 +1,7 @@
+# Conceptual, Azure / AWS / K8s HPA all express the same idea
+service: triage-api
+metric: http_requests_per_second
+target: 40
+min_replicas: 1
+max_replicas: 6          # hard ceiling tied to monthly soft budget
+scale_down_cooldown: 300s

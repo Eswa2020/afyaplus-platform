@@ -1,0 +1,9 @@
+Quantization / cheaper-path claim template (conceptual; loaders vary: bitsandbytes, AWQ, GPTQ, vendor endpoints)
+
+A claim only counts if it carries all four parts:
+  1. bits or path used        e.g. "INT8 self-host"
+  2. cost change              e.g. "$/1k down 38%"
+  3. quality number           e.g. "urgency agreement vs full model = 97%"
+  4. named test set           e.g. "on 50 fixed triage fixtures"
+Also record p95 before and after in the cost memo.
+Drop any part and it is an anecdote, not evidence.

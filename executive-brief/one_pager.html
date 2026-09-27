@@ -1,0 +1,75 @@
+<html><head><meta charset=utf-8><style>body{font-family:Segoe UI,Arial,sans-serif;max-width:760px;margin:24px auto;font-size:11pt;line-height:1.4;color:#222}h1{font-size:18pt;margin-bottom:4px}h2{font-size:12.5pt;margin:14px 0 4px;color:#0b4f6c}table{border-collapse:collapse;margin:6px 0}td,th{border:1px solid #bbb;padding:3px 8px}th{background:#eef3f6}</style></head><body><h1>AfyaPlus triage: scaling for the payday partner channel</h1>
+<p><strong>Recommendation: GO, with four conditions (below).</strong> The service can absorb the partner
+channel's payday spike at a predictable cost, provided the response cache is live first.</p>
+<h2>What one triage answer costs</h2>
+<ul>
+<li><strong>$0.20 per 1,000 answers</strong> to run (AI model + servers).</li>
+<li><strong>$0.30 per 1,000</strong> including engineer time to operate it (8 hours a month, placeholder rate).</li>
+<li>A normal month (2 million answers) costs <strong>$404</strong> to run, inside the <strong>$450</strong> monthly budget.</li>
+</ul>
+<h2>The payday spike</h2>
+<p>The partner expects <strong>10× normal traffic</strong> on one payday weekend a month, which adds 1.2 million
+answers (3.2 million in the month).</p>
+<table>
+<thead>
+<tr>
+<th>Payday-spike month</th>
+<th>Run cost</th>
+<th>vs $450 budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No cache</td>
+<td>$646</td>
+<td><strong>Over by $196</strong></td>
+</tr>
+<tr>
+<td>Cache answers 35% of requests</td>
+<td>$450</td>
+<td>At the limit</td>
+</tr>
+<tr>
+<td>Cache answers 60% of requests (lab result)</td>
+<td>$309</td>
+<td>Under by $141</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The cache is what keeps the spike affordable.</strong> It must answer at least 35% of requests.</p>
+<h2>Two cost levers, built and tested</h2>
+<ol>
+<li><strong>Reuse identical answers (cache).</strong> When the same question arrives again within 10 minutes,
+   the stored answer is returned instead of paying the AI model again. In testing, 60 of 100
+   requests were served this way, <strong>halving the cost per answer to $0.10 per 1,000</strong>, with no
+   change to the answers themselves.</li>
+<li><strong>Move non-urgent work overnight (batch queue).</strong> Reports that can wait no longer compete
+   with patients for capacity. Each job is paid for once, and a broken job is set aside for a
+   person to review instead of blocking the rest.</li>
+</ol>
+<p><strong>Tested and rejected:</strong> a cheaper, shorter-answer setup cut AI cost by 65% but <strong>changed 1 in 5
+urgency decisions</strong>, including one that downgraded a patient who should have been flagged
+urgent. Not acceptable for health triage.</p>
+<h2>Where the AI runs</h2>
+<p>Keep renting the AI model (API). Running our own GPU servers only becomes cheaper above
+<strong>8.6 million answers a month</strong> (17 million with the cache), more than four times today's volume,
+and adds round-the-clock operating risk.</p>
+<h2>Main risk and mitigation</h2>
+<p><strong>Risk:</strong> the 60% cache rate was measured on test data. If real patients rarely repeat the same
+wording, the spike month could exceed the budget by up to $196.
+<strong>Mitigation:</strong> measure the real rate on the first payday weekend. Budget alerts fire at 80% of
+spend ($360) and whenever the month is forecast to exceed $450, early enough to throttle the
+partner's traffic before the overrun.</p>
+<h2>Conditions for GO</h2>
+<ol>
+<li><strong>Cache live</strong> before the first partner payday weekend.</li>
+<li><strong>Partner limits agreed:</strong> a request rate limit, and retries only after server errors. A
+   badly behaved client retrying on 5% of traffic adds 20% to the bill.</li>
+<li><strong>Budget alerts active</strong> at 80% of actual spend and at a 100% forecast, scoped to the
+   triage service, with a named engineer on the alert.</li>
+<li><strong>Pre-approved contingency:</strong> a one-month budget of up to $650 if the real cache rate
+   comes in below 35%, with a review before any further increase.</li>
+</ol>
+<p><em>Basis: AI model prices are published list prices for gpt-4o-mini; in this build the triage
+model call is a placeholder, so costs are modelled, not billed. Details: <code>cost_model.md</code>,
+<code>measurements.md</code>, <code>api_vs_selfhost.md</code>.</em></p></body></html>

@@ -1,0 +1,8 @@
+{
+  "service": "triage-api",
+  "version": "1.0.0",
+  "env": "staging",
+  "partner": "kisumu-clinic",
+  "cost-center": "clinical-ai",
+  "owner": "wanjiru"
+}

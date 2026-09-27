@@ -1,0 +1,8 @@
+workloads:
+  triage-api:
+    pattern: always-on          # clinic hours need warm /health
+    image: triage-api:1.0.0
+    min_replicas: 1
+  nightly_usage_rollup:
+    pattern: serverless         # runs once; cold start acceptable
+    trigger: cron(0 2 * * *)
