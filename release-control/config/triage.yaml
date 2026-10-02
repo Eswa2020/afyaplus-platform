@@ -1,0 +1,7 @@
+# Triage behaviour contract. Change only through a reviewed pull request,
+# never in a cloud portal. Version strings are quoted on purpose.
+model: gpt-4o-mini
+temperature: 0.2
+max_tokens: 300
+prompt_version: "1.2.0"
+rate_limit_per_minute: 30

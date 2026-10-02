@@ -1,0 +1,5 @@
+Additive is MINOR because every agent that worked against 1.0.0 still works
+against 1.1.0 without changing a line: list_low_stock and version://current are
+things old agents can simply ignore. Renaming a required argument such as
+check_stock's item is MAJOR because it breaks the contract agents already bound
+to, so the cost of the change lands on somebody else's code, not ours.

@@ -1,0 +1,3 @@
+{"req_id": "r1", "golden_id": "g001", "expected_urgency": "medium"}
+{"req_id": "r2", "golden_id": "g002", "expected_urgency": "high"}
+{"req_id": "r3", "golden_id": "g003", "expected_urgency": "medium"}

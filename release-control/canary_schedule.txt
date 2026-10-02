@@ -1,0 +1,12 @@
+Pre-condition (never skip): golden eval green in CI for the candidate sha256.
+
+Stage 0  shadow  0% served   mirror staging traffic, score offline (shadow_score.py)
+                             hold 24 h; go only if urgency_agreement >= 0.95
+                             and no must_not failures
+t+0      canary  5%          staging keys only, hold 30 min
+                             watch: tool error_rate < 0.10, eval proxies, must_not
+t+30 min         10%         if all guardrails green
+t+2 h            50%         if p95 and must_not still hold
+t+24 h           100%        or roll back: PROMPT_VERSION=1.2.0 (same image tag)
+
+Hold times lengthen on purpose: crashes show in minutes, tone problems need traffic.

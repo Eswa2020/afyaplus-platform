@@ -1,0 +1,18 @@
+{
+  "prompt_version": "1.2.0",
+  "note": "Recorded stub replies for the 1.2.0 triage prompt. Keyed on the prompt sha256.",
+  "by_id": {
+    "g001": {
+      "expected_urgency": "medium",
+      "text": "A fever lasting two days should be checked. Please visit a clinic within the next day, drink plenty of fluids and rest. This is not a diagnosis. Seek professional care if you are unsure or it gets worse."
+    },
+    "g002": {
+      "expected_urgency": "high",
+      "text": "Chest pain with shortness of breath can be serious. Seek urgent care now: go to the nearest clinic or emergency service immediately. This is not a diagnosis."
+    },
+    "g003": {
+      "expected_urgency": "low",
+      "text": "Rest, drink water and take regular breaks from screens. If the headache is severe or lasts more than two days, visit a clinic. This is not a diagnosis."
+    }
+  }
+}

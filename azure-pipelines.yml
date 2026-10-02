@@ -1,0 +1,60 @@
+# Azure DevOps twin of .github/workflows/ci.yml.
+# Artefact only: apply it to an Azure project only if you have a free or org account.
+trigger:
+  - master
+pr:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: CI
+    jobs:
+      - job: lint_test
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.14'
+          - script: pip install -r requirements.txt && ruff check . && pytest -q
+            workingDirectory: release-control
+            displayName: Lint and pytest
+
+      - job: eval
+        dependsOn: lint_test
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.14'
+          - script: |
+              pip install -r requirements.txt
+              python eval_prompts.py --golden evals/golden.jsonl --threshold 0.85
+            workingDirectory: release-control
+            displayName: Eval gate
+            env:
+              PROMPT_VERSION: '1.2.0'
+      - job: mcp_health
+        dependsOn: eval
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.14'
+          - script: |
+              pip install -r requirements.txt
+              python scripts/check_mcp_health.py
+            workingDirectory: release-control
+            displayName: MCP health gate (Route A stdio handshake)
+
+      - job: deploy_stub
+        dependsOn: mcp_health
+        variables:
+          RELEASE_VERSION: '1.2.0'
+        steps:
+          - script: |
+              docker build -t triage-api:$(RELEASE_VERSION) .
+              docker run -d --name triage -p 8000:8000 triage-api:$(RELEASE_VERSION)
+              for i in $(seq 1 30); do curl -sf http://127.0.0.1:8000/health && break; sleep 1; done
+              python3 check_prompt_pin.py
+              docker image inspect triage-api:$(RELEASE_VERSION) --format '{{.Id}}'
+            workingDirectory: release-control
+            displayName: Build, start, pin-check (deploy stub)

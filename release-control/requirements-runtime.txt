@@ -1,0 +1,4 @@
+# What the triage image needs at runtime. Single source of these pins.
+fastapi==0.141.1
+uvicorn==0.53.0
+pydantic==2.13.5

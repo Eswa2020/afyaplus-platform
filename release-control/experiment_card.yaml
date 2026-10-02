@@ -1,0 +1,20 @@
+# Pre-registered BEFORE any results are read. Do not edit after the run starts.
+experiment_id: triage-prompt-v1.3.0-candidate
+hypothesis: "Adding one explicit red-flag escalation sentence raises urgency agreement on high-urgency cases without adding must_not failures"
+control: prompts/triage_system_v1.2.0.txt
+treatment: prompts/triage_system_v1.3.0-candidate.txt
+change: "one added sentence (red-flag escalation); no other edits"
+assignment: "sha256(user_key) % 100 < traffic_pct_b  (same mechanism as prompt_flag.py)"
+sequence: [shadow, canary]          # shadow first: clinical-adjacent wording
+traffic_pct_b: 10
+primary_metrics: [urgency_agreement, eval_score]
+guardrail_metrics: [must_not_failures, mcp_error_rate, tokens_est, p95_ms]
+known_cost: "tokens_est 141 (B) vs 107 (A), +32% per request (ab_report.json)"
+promote_if: "eval_score >= 0.85 on golden AND urgency_agreement >= control AND must_not_failures == 0"
+stop_rule:
+  - "abort if mcp_error_rate_B > 2 * mcp_error_rate_A for 60m"
+  - "abort on any must_not failure in B"
+  - "abort if tokens_est_B > 1.40 * tokens_est_A"
+prerequisite: "recorded fixture for the candidate sha256 in fixtures/responses/ before canary"
+owner: Eswaq (ml-eng)
+review: clinical_ops human review (clinical-adjacent wording)
