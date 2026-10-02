@@ -5,3 +5,6 @@ __pycache__/
 .pytest_cache/
 *.pyc
 jobs.sqlite
+mlflow.db
+mlruns/
+logs/

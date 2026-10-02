@@ -1,0 +1,7 @@
+Failing run: service started with PROMPT_VERSION=1.3.0-candidate; prompts/pin.json pins 1.2.0.
+Command: python check_prompt_pin.py
+Exit code: 1
+Output:
+PROMPT PIN MISMATCH
+  expected: {'prompt_version': '1.2.0', 'prompt_sha256': '28b5f129a4bd3650b5765d74681c63df803ea241a0dd749dc7c99d4b0bd4d4ff'}
+  health:   {'prompt_version': '1.3.0-candidate', 'prompt_sha256': '2231005ed6ddf425f64e3452307ae82207c465063aaf2584378a796c983de7b9'}

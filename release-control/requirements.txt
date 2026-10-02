@@ -1,0 +1,7 @@
+# CI install set for release-control. Pinned to versions tested locally.
+# Full local environment (incl. mlflow): requirements-dev.txt
+-r requirements-runtime.txt
+mcp==1.30.0
+pytest==9.1.1
+ruff==0.16.9
+pyyaml==6.0.3

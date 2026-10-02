@@ -1,0 +1,8 @@
+# Who must review changes to patient-adjacent behaviour and to the gates.
+# Solo repository: one owner today; in a team these become
+# @afyaplus/clinical-ai (prompts, evals, fixtures) and @afyaplus/platform (pipelines).
+/release-control/prompts/   @Eswa2020
+/release-control/evals/     @Eswa2020
+/release-control/fixtures/  @Eswa2020
+/.github/workflows/         @Eswa2020
+/azure-pipelines.yml        @Eswa2020

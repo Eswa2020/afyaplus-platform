@@ -1,0 +1,85 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+defaults:
+  run:
+    working-directory: release-control
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+          cache: pip
+          cache-dependency-path: release-control/requirements.txt
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Lint
+        run: ruff check .
+      - name: Unit tests
+        run: pytest -q
+
+  eval:
+    needs: lint-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+          cache: pip
+          cache-dependency-path: release-control/requirements.txt
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Eval gate
+        run: python eval_prompts.py --golden evals/golden.jsonl --threshold 0.85
+        env:
+          PROMPT_VERSION: '1.2.0'
+          # Optional live calls later; never commit the key
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          TRIAGE_TEMPERATURE: ${{ vars.TRIAGE_TEMPERATURE || '0' }}
+  mcp-health:
+    needs: eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+          cache: pip
+          cache-dependency-path: release-control/requirements.txt
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: MCP health gate (Route A stdio handshake)
+        run: python scripts/check_mcp_health.py
+      # Route A only: the logistics MCP is stdio, so there is no port to curl.
+
+  deploy-staging:
+    needs: [lint-test, eval, mcp-health]
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_VERSION: '1.2.0'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image (release tag + commit tag)
+        run: docker build -t triage-api:${RELEASE_VERSION} -t triage-api:${{ github.sha }} .
+      - name: Start container (deploy stub, no cluster)
+        run: docker run -d --name triage -p 8000:8000 triage-api:${RELEASE_VERSION}
+      - name: Wait for /health
+        run: |
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:8000/health && exit 0
+            sleep 1
+          done
+          docker logs triage
+          exit 1
+      - name: Prompt pin gate on the running container
+        run: python3 check_prompt_pin.py
+      - name: Record image id for the runbook
+        run: docker image inspect triage-api:${RELEASE_VERSION} --format '{{.Id}}'

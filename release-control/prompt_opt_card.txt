@@ -1,0 +1,9 @@
+hypothesis: Adding one explicit red-flag escalation sentence raises urgency
+            agreement on high-urgency cases (g002) without new must_not failures
+metric:     eval_score (label + safety) on evals/golden.jsonl; must_not fail count;
+            tokens_est per request
+change:     1.2.0 -> 1.3.0-candidate (one added sentence only)
+stop rule:  revert if eval_score drops more than 0.05, if any must_not case fails,
+            or if tokens_est rises more than 40%
+owner:      Eswaq (ml-eng)
+reviewer:   clinical_ops

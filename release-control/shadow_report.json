@@ -1,0 +1,12 @@
+{
+  "n_control": 4,
+  "n_shadow": 3,
+  "n_joined": 3,
+  "missing_shadow": [
+    "r4"
+  ],
+  "urgency_agreement": 0.6666666666666666,
+  "disagreements": [
+    "r3"
+  ]
+}
