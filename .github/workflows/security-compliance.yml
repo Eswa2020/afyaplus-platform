@@ -42,11 +42,11 @@ jobs:
           python boot_guard.py
       - name: RBAC tests
         run: python -m pytest -q test_rbac.py
-      - name: Fail closed without the signing key
-        run: python resolve_secrets.py
-              - name: Thursday gates (inventory, brief, retention, rights)
+      - name: Thursday gates (inventory, brief, retention, rights)
         run: |
           python check_inventory.py
           python check_brief.py manager_brief.md
           python retention_sweep.py
           SUBJECT_PEPPER=lab-pepper-value python rights_lookup.py
+      - name: Fail closed without the signing key
+        run: python resolve_secrets.py
