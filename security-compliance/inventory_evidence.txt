@@ -1,0 +1,9 @@
+== INVENTORY AS WRITTEN ==
+inventory OK 5 datasets
+exit: 0
+== triage_messages UNFLAGGED ==
+FAIL triage_messages must be special_category true
+exit: 1
+== RESTORED ==
+inventory OK 5 datasets
+exit: 0

@@ -1,0 +1,15 @@
+Risk: override-style user text
+  Mitigation: injection_guard returns 400, plus role limits on tools
+  Residual:   novel phrasing may still land; we fail closed on known phrasing and log the event
+
+Risk: corpus swap
+  Mitigation: knowledge/pin.json checked in CI
+  Residual:   a reviewed but wrong FAQ still needs clinical human review
+
+Risk: identifiers reaching logs
+  Mitigation: redact.py then hash (redact_then_hash.py) before any write; logs/ is gitignored
+  Residual:   patterns cover known Kenyan ID, phone and M-Pesa formats only; new formats may slip through
+
+Risk: prompts leaving Kenya via the model host
+  Mitigation: transfer recorded as a separate duty (dpa_extra_duties.md); payloads minimised
+  Residual:   the cross-border basis is not yet confirmed by legal

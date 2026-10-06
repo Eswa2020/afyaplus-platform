@@ -1,0 +1,22 @@
+[
+  {"kind": "secret",
+   "asset": "JWT_SECRET",
+   "actor": "anyone with repo read access or a leaked laptop",
+   "action": "read a committed .env and forge partner tokens",
+   "control": ".env gitignored and absent from all history (secrets_not_in_git.sh); rotate on any leak"},
+  {"kind": "data",
+   "asset": "chat logs (triage messages)",
+   "actor": "curious partner or internal user with log access",
+   "action": "read health details or ID numbers from raw logs",
+   "control": "audit rows store a payload hash, not the message (audit_log.py); retention rules Thursday"},
+  {"kind": "config",
+   "asset": "prompt bundle",
+   "actor": "careless vendor or teammate",
+   "action": "silent rewrite",
+   "control": "versioned prompts pinned by hash in CI, CODEOWNERS review required (Week 8 release-control)"},
+  {"kind": "mcp",
+   "asset": "check_stock",
+   "actor": "partner client with a valid token",
+   "action": "bulk-extract all clinics via clinic_id='*'",
+   "control": "JWT role filters the tool list; clinic_id allowlist returns 400 (allowlist_stock.py)"}
+]

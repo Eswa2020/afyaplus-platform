@@ -1,0 +1,7 @@
+{
+  "triage_messages":   {"days": 90,   "notes": "health-adjacent; hashed and redacted payloads"},
+  "audit_logs":        {"days": 180,  "notes": "actor, action, resource; no raw clinical text"},
+  "mcp_stock_queries": {"days": 90,   "notes": "operational stock checks; no clinical content"},
+  "jwt_subjects":      {"days": 180,  "notes": "kept as long as the audit rows that reference them"},
+  "knowledge_files":   {"days": null, "notes": "not personal data; pinned in git"}
+}

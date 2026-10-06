@@ -1,0 +1,10 @@
+== PINNED, UNCHANGED ==
+corpus pin OK ['knowledge/ors_faq.md']
+exit: 0
+== AFTER SILENT EDIT ==
+CORPUS PIN MISMATCH
+  ('knowledge/ors_faq.md', '2da4baa4923dd54e2d3b7f020cbae6a7f8e5294c810bcb7ea4f19ac919dde29b', 'bea0be6f29f87cd98d39cebcb2230a7a3bbcebd92a9f0dd8da6debddba50cb27')
+exit: 1
+== RESTORED VIA git checkout ==
+corpus pin OK ['knowledge/ors_faq.md']
+exit: 0

@@ -1,0 +1,4 @@
+Lab rule: document the control, do not roll your own cipher.
+  - Docker volume / RDS / S3: enable encryption flags in IaC or capture console evidence
+  - App: never log JWT_SECRET or raw national ID numbers
+  - Backups: same encryption as production, or they are a second cleartext copy

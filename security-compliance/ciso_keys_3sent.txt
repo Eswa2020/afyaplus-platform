@@ -1,0 +1,3 @@
+JWT_SECRET is referenced as jwt-signing-key in secret_refs.yaml, with vault_name local-env in this lab, and is not stored in git.
+Only the triage-api runtime environment and the CI runner (via the repository secret) may read the value; partner tokens never receive the signing key, and MCP tools do not return environment variables.
+If it is unset or blank, resolve_secrets.py and boot_guard.py print the secret name and exit 1, so triage-api does not boot on a default.

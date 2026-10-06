@@ -1,0 +1,14 @@
+== PASSING RUN ==
+compose scanned: ['docker-compose.yml']
+OK: .env ignored and Compose looks clean
+exit: 0
+
+== FAILING RUN (.env removed from .gitignore) ==
+FAIL: .env is not gitignored. Add it, then re-run.
+exit: 1
+
+== RESTORED RUN ==
+compose scanned: ['docker-compose.yml']
+OK: .env ignored and Compose looks clean
+exit: 0
+

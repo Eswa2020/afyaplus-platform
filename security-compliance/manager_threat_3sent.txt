@@ -1,0 +1,3 @@
+We protect API keys, signing secrets, prompt files, clinic stock, and chat logs on the AfyaPlus triage and MCP path.
+The two doors we closed today are cleartext partner URLs plus secrets in git, and user text that tries to override instructions plus unpinned FAQ files.
+Evidence lives in transit_policy.py, gitignore_evidence.txt, injection_guard.py, knowledge/pin.json and pin_fail_notes.txt.

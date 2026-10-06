@@ -1,0 +1,5 @@
+== logs/audit.jsonl (redact.py) ==
+{"actor": "partner_clinic", "action": "check_stock", "resource": "KSM-01", "payload": "id [REDACTED_ID] phone [REDACTED_PHONE] code [REDACTED_MPESA] Bearer [REDACTED]"}
+== logs/audit_stacked.jsonl (redact_then_hash.py) ==
+{"actor": "partner_clinic", "action": "check_stock", "resource": "KSM-01", "payload_redacted": "national id [REDACTED_ID] Bearer [REDACTED]", "payload_sha": "f00f7919b535d699"}
+Note: logs/ is gitignored at the repo root by design; these quoted lines are the committed evidence.
