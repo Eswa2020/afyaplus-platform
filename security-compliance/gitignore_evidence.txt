@@ -1,3 +1,4 @@
+cat > gitignore_evidence.txt <<'EOF'
 == PASSING RUN ==
 compose scanned: ['docker-compose.yml']
 OK: .env ignored and Compose looks clean
@@ -10,4 +11,5 @@ exit: 1
 == RESTORED RUN ==
 compose scanned: ['docker-compose.yml']
 OK: .env ignored and Compose looks clean
-exit: 0grep -c "633" gitignore_evidence.txt
+exit: 0
+EOF
