@@ -1,0 +1,9 @@
+== COMPLETE CARD ==
+OK kms_twin schema: 5 jobs, both twins present
+exit: 0
+== AWS TWINS BLANKED (audit empty, grant_identity TBD) ==
+OK kms_twin schema: 5 jobs, both twins present
+exit: 0
+== RESTORED ==
+OK kms_twin schema: 5 jobs, both twins present
+exit: 0
