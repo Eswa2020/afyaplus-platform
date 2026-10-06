@@ -27,3 +27,8 @@
 - We do not claim legal compliance: lawful-basis labels are teaching labels pending legal review, and the impact note is a stub.
 - We do not claim redaction is complete: it is a tested net for known Kenyan ID, phone and M-Pesa formats, not a DLP product.
 - AfyaPlus advises; it does not diagnose. People decide.
+
+## Finance transfer (BenkiYetu)
+- The same controls carry over to a lender: vault references, fail-closed boot, role-limited tools, redacted logs, and the data inventory (benkiyetu_transfer.md).
+- One line does not move: the assistant may recommend, it never decides. Fraud hints help staff; people approve, decline or price credit.
+- Credit bureau retention can run for years and may conflict with an erasure request. We document that conflict and route it to the data owner; the FAQ assistant cannot erase a bureau record and will not claim it did.

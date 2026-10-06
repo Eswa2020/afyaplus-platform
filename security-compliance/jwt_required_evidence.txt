@@ -1,0 +1,3 @@
+== POST /triage with NO token (Week 6 JWT must still refuse) ==
+HTTP 401
+service: secure_triage_api.py (Week 6 JWT-protected API), uvicorn on 127.0.0.1:8001
