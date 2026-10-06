@@ -1,0 +1,6 @@
+{
+  "tool": "check_stock",
+  "returns": ["clinic_id", "item", "qty"],
+  "never_returns": ["env", "files", "secrets"],
+  "blast_radius_note": "one over-scoped token must not dump all clinics"
+}
