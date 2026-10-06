@@ -1,0 +1,46 @@
+name: security-compliance
+
+on:
+  pull_request:
+    paths:
+      - 'security-compliance/**'
+      - '.github/workflows/security-compliance.yml'
+  push:
+    branches: [security-compliance]
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    env:
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}   # a name, injected at runtime
+      # never: run: echo "$JWT_SECRET"
+    defaults:
+      run:
+        working-directory: security-compliance
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # full history, so the .env history check sees every branch
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml cryptography pytest
+      - name: Secrets hygiene (.env ignored, never in history, Compose clean)
+        run: bash secrets_not_in_git.sh
+      - name: Threat model, KMS twin, corpus pin gates
+        run: |
+          python check_threat_model.py
+          python check_kms_twin.py
+          python check_corpus_pin.py
+      - name: Policy and guard self-tests
+        run: |
+          python transit_policy.py
+          python injection_guard.py
+          python allowlist_ids.py
+          python allowlist_stock.py
+          python redact.py
+          python boot_guard.py
+      - name: RBAC tests
+        run: python -m pytest -q test_rbac.py
+      - name: Fail closed without the signing key
+        run: python resolve_secrets.py
