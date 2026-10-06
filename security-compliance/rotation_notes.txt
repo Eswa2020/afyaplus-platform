@@ -1,0 +1,8 @@
+BUILD NOW evidence:
+  - secret_refs.yaml names jwt-signing-key
+  - README: how to mint a new JWT_SECRET and reload triage-api
+  - Partners: a token time-to-live, so rotation eventually expires old Bearer tokens
+
+RECOGNISE:
+  - Automatic Key Vault rotation callbacks
+  - Dual-key JWT verification during a 24 hour overlap
